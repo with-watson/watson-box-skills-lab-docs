@@ -1,0 +1,9 @@
+{
+  "nlu_iam_key": "<YOUR API KEY>",
+  "url":"<YOUR URL>",
+  "keywords": true,
+  "concepts": true,
+  "keyword_limit":5,
+  "concept_limit": 5,
+  "storage":"box"
+}
