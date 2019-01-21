@@ -44,7 +44,8 @@ Please note that there are additional enrichments provided by Watson's NLU servi
 
 As an example, the information included in the `config.json.example` file  will show the top 5 detected concepts and keywords in the Box Skill Card
 
-```"keywords": true,
+```
+  "keywords": true,
   "concepts": true,
   "keyword_limit":5,
   "concept_limit": 5
