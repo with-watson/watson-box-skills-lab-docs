@@ -14,6 +14,7 @@ This code is being provided AS-IS for evaluation purposes and is not a productio
 * The [IBM Cloud Functions CLI](https://console.bluemix.net/docs/openwhisk/bluemix_cli.html#cloudfunctions_cli)
 * An instance of IBM Watson's Natural Language Understanding Service (available [here](https://console.bluemix.net/catalog/services/natural-language-understanding))
 * A Docker account and [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* A [Box developer account](https://developer.box.com/)
 
 ## Configuration for Watson NLU service
 
