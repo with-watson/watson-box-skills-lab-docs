@@ -56,7 +56,7 @@ Finally, there is one other key in your `config.json` that is called `storage`. 
 ### Deploying the Skill
 
 1. Login to the IBM Cloud CLI by running the command `ibmcloud login` and input your credentials when prompted. Then, specify your org and space by running the command `ibmcloud target -o <YOUR_ORG> -s <YOUR_SPACE>`.
-2. From the main root of the repository run the command `deployCapability.sh <NAME OF SKILL>` where <NAME OF SKILL> can be whatever name you want to call your skill.
+2. From the main root of the repository run the command `./deployCapability.sh <NAME OF SKILL>` where <NAME OF SKILL> can be whatever name you want to call your skill.
 3. Navigate to https://console.bluemix.net/openwhisk/actions to look at your newly created function. Click on its name and then navigate to the 'Endpoints' tab in the sidebar. Copy the URL under Web Action (should end in .json). This URL will later be registered with Box to activate the skill.
 4. Using the URL gathered in the last step as the invocation url, [Follow the steps here to register your skill with Box](https://developer.box.com/docs/configure-a-box-skill). (This skill will only work on .docx files, so it is recommended to limit the invocations of this skill to the appropriate filetype during this process)
 
