@@ -1,10 +1,24 @@
+# Copyright 2019 IBM All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from __future__ import print_function
 from concurrent.futures import ThreadPoolExecutor, wait
 from threading import Lock
 
 from docx import Document
-from watson_developer_cloud import NaturalLanguageUnderstandingV1
-from watson_developer_cloud.natural_language_understanding_v1 import Features, ConceptsOptions, KeywordsOptions
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, KeywordsOptions
 
 import src.bsk_utils as utils
 import json
@@ -28,7 +42,7 @@ class Action(object):
         self.keywords = []
         self.lock = Lock()
         self.model = NaturalLanguageUnderstandingV1(
-            version='2018-03-16',
+            version='2019-05-16',
             iam_apikey=config['nlu_iam_key'],
             url=config['url'])
 

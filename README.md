@@ -41,7 +41,7 @@ This Skill is expecting a `config.json` file to be present in the root folder of
 
 ### API key & endpoint
 
-Your Natural Language Understanding service credentials can be found in the service at Service Credentials > New Credentials > Add. Then, click View Credentials to copy your API key & URL.
+Your Natural Language Understanding service credentials can be found in the service by selecting `Manage` in the sidebar. Then, copy your API key & URL.
 
 ![Api Key Example](/docs/api_key_example.png)
 
