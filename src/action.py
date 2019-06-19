@@ -1,13 +1,26 @@
+# Copyright 2019 IBM All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from __future__ import print_function
-from concurrent.futures import ThreadPoolExecutor, wait
 from threading import Lock
 
 from docx import Document
-from watson_developer_cloud import NaturalLanguageUnderstandingV1
-from watson_developer_cloud.natural_language_understanding_v1 import Features, ConceptsOptions, KeywordsOptions
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, KeywordsOptions
 
 import src.bsk_utils as utils
-import json
+from src.storage import Storage
 
 
 class Action(object):
@@ -28,7 +41,7 @@ class Action(object):
         self.keywords = []
         self.lock = Lock()
         self.model = NaturalLanguageUnderstandingV1(
-            version='2018-03-16',
+            version='2019-05-16',
             iam_apikey=config['nlu_iam_key'],
             url=config['url'])
 
@@ -68,10 +81,9 @@ class Action(object):
                             texts.append(run.text)
 
             texts = '. '.join(texts)
-        except ValueError as e:
+        except ValueError:
             print("ERROR: Requested file {} is not a .docx file and cannot be processed".format(file_path))
             return
-        text_collection = []
 
         self._parallel_NlU(texts)
 
@@ -86,7 +98,7 @@ class Action(object):
                 self.keywords, "Keywords", identification, 1)
             self.cards.append(keyword_card)
 
-    def push2storage(self, storage: 'Storage') -> list:
+    def push2storage(self, storage: Storage) -> list:
         """
           Input:
             * Storage Object
@@ -104,8 +116,7 @@ class Action(object):
         return storage.update_file({'cards': self.cards})
 
     def _parallel_NlU(self, text):
-            
-            # A Function to call Watson Natural Language Understanding
+        # A Function to call Watson Natural Language Understanding
 
         if self.config['keywords']:
             keyword_option = KeywordsOptions(limit=self.config['keyword_limit'])
@@ -132,15 +143,15 @@ class Action(object):
             our_concepts = []
             for concept in json_results['concepts']:
                 our_concepts.append(concept['text'])
-            
+
             our_keywords = []
             for keyword in json_results['keywords']:
                 our_keywords.append(keyword['text'])
-            
+
             self.lock.acquire()
             self.concepts = self.concepts + our_concepts
             self.keywords = self.keywords + our_keywords
             self.lock.release()
-        
+
         except Exception as e:
             print(str(e))
