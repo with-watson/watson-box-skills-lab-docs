@@ -46,7 +46,7 @@ class Action(object):
             version='2020-08-01',
             authenticator=authenticator
         )
-         self.model.set_service_url(config['url'])
+        self.model.set_service_url(config['url'])
 
     def do_action(self, file_path: str, identification: int) -> None:
         """
