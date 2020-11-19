@@ -18,6 +18,7 @@ from threading import Lock
 from docx import Document
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, KeywordsOptions
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 import src.bsk_utils as utils
 from src.storage import Storage
@@ -40,10 +41,12 @@ class Action(object):
         self.concepts = []
         self.keywords = []
         self.lock = Lock()
+        authenticator = IAMAuthenticator(config['nlu_iam_key'])
         self.model = NaturalLanguageUnderstandingV1(
-            version='2019-05-16',
-            iam_apikey=config['nlu_iam_key'],
-            url=config['url'])
+            version='2020-08-01',
+            authenticator=authenticator
+        )
+        self.model.set_service_url(config['url'])
 
     def do_action(self, file_path: str, identification: int) -> None:
         """

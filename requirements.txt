@@ -3,4 +3,4 @@ PyJWT==1.5.3
 PyPdf2==1.26
 python-docx==0.8.6
 requests-toolbelt==0.8.0
-ibm-watson==3.0.4
+ibm-watson==4.7.1
