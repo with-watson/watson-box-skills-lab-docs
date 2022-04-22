@@ -1,6 +1,6 @@
 boxsdk==1.5.5
 PyJWT==1.5.3
-PyPdf2==1.26
+PyPdf2==1.27.5
 python-docx==0.8.6
 requests-toolbelt==0.8.0
 ibm-watson==4.7.1
